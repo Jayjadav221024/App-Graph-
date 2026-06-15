@@ -1,0 +1,5 @@
+import {create} from "zustand";
+type Tab="cpu"|"memory"|"disk"|"region";
+type ThemeMode="light"|"dark";
+type UI={selectedAppId:string;selectedNodeId:string|null;isMobilePanelOpen:boolean;tab:Tab;fitToken:number;errorMode:boolean;theme:ThemeMode;setSelectedAppId:(id:string)=>void;setSelectedNodeId:(id:string|null)=>void;setMobilePanelOpen:(v:boolean)=>void;setTab:(t:Tab)=>void;requestFit:()=>void;setErrorMode:(v:boolean)=>void;setTheme:(theme:ThemeMode)=>void;toggleTheme:()=>void};
+export const useUI=create<UI>((set)=>({selectedAppId:"app-1",selectedNodeId:null,isMobilePanelOpen:false,tab:"cpu",fitToken:0,errorMode:false,theme:"dark",setSelectedAppId:(id)=>set({selectedAppId:id,selectedNodeId:null}),setSelectedNodeId:(id)=>set({selectedNodeId:id,isMobilePanelOpen:true}),setMobilePanelOpen:(v)=>set({isMobilePanelOpen:v}),setTab:(t)=>set({tab:t}),requestFit:()=>set(s=>({fitToken:s.fitToken+1})),setErrorMode:(v)=>set({errorMode:v}),setTheme:(theme)=>set({theme}),toggleTheme:()=>set(s=>({theme:s.theme==="dark"?"light":"dark"}))}));
